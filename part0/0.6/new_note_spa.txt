@@ -1,0 +1,28 @@
+Step: 'enter new note and click submit button using html form'
+
+note over browser: 
+<form id="notes_form">
+      <input type="text" name="note"><br>
+      <input type="submit" value="Save">
+</form>
+- click submit fire window.onload global browser event handler method
+- where we prevent default form preventDefault behavior (send the data to the server and cause a new GET request)
+-then we pushed the new note came feat event as  e.target.elements[0].value and push this to notes
+- then clear form input value (  <input type="text" name="note">)
+- then send note to the server 
+
+
+browser->server HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa  where:
+
+-payload:
+
+{
+content: "spa new note "
+date: "2020-09-24T10:45:18.194Z"
+}
+-Content-type: "application/json"
+
+server->browser: Json; charset=utf-8 - {"message":"note created"}
+
+
+

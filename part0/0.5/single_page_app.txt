@@ -1,0 +1,21 @@
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->browser: HTML-code  - content-type: text/html - status code 200
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css - content-type: text/css; charset=UTF-8 - status code 200
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server-->browser: spa.js - content-type: application/javascript; charset=UTF-8 - status code 200
+
+note over browser:
+- after getting spa.js browser starts executing js-code were get data.json from the server 
+(xhttp.open("GET", "/exampleapp/data.json", true))
+
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json - content-type: application/json; charset=utf-8 - status code 200
+server-->browser: [{ content: "note", date: "2020-05-23" }, ...]
+
+note over browser:
+-browser executes the event handler as callback from spa.js after getting json file to renders data.json as notes in html
+- where check readyState and status code
+- then proceed with parse data came in json using JSON.parse and assign this data to notes variable
+- then runs redraw function where renders the note list (in case where list has already exist - remove all list and append new one)

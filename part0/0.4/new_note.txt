@@ -1,0 +1,38 @@
+
+
+
+Step: 'enter new note and click submit button using html form'
+
+note over browser
+<form action="/exampleapp/new_note" method="POST">
+      <input type="text" name="note"><br>
+      <input type="submit" value="Save">
+</form>
+
+where "action="/exampleapp/new_note" -  form attribute with URL that processes the form submission
+and 
+where method="POST" - form attribute of HTTP method POST where form data sent as the request body to the server
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note (form data: {note: new note})
+server-->browser: status: 302 redirect status moved to the url given by the location header  - location: /exampleapp/notes
+
+note over browser: 
+page reload
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: HTML-code  - content-type: text/html - status code 200
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css - content-type: text/css; charset=UTF-8 - status code 200
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: main.js - content-type: application/javascript; charset=UTF-8 - status code 200
+
+note over browser:
+- after getting main.js browser starts executing js-code were get data.json from the server 
+(xhttp.open("GET", "/exampleapp/data.json", true))
+
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json - content-type: application/json; charset=utf-8 - status code 200
+server-->browser: [{ content: "new note", date: "2019-05-23" }, ...]
+
+note over browser:
+browser executes the event handler as callback after getting json file to renders data.json as notes in html
